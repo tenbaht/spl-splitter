@@ -1,0 +1,93 @@
+diff -ru a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_clk.c b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_clk.c
+--- a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_clk.c	2019-01-04 00:14:05.838408504 +0100
++++ b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_clk.c	2019-01-04 00:16:07.125004170 +0100
+@@ -41,7 +41,7 @@
+   * @{
+   */
+ 
+-CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Dividor factors */
++//CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Dividor factors */
+ 
+ /**
+   * @}
+@@ -173,6 +173,7 @@
+   * @param None
+   * @retval uint32_t The master clock frequency
+   */
++CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Dividor factors */
+ uint32_t CLK_GetClockFreq(void)
+ {
+   uint32_t clockfrequency = 0;
+diff -ru a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_flash.c b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_flash.c
+--- a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_flash.c	2019-01-04 00:14:05.834408418 +0100
++++ b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_flash.c	2019-01-04 00:18:11.459662300 +0100
+@@ -124,8 +124,8 @@
+ 
+ /* SDCC patch: for >64kB to pass data to/from inline ASM (SDCC doesn't support far pointers yet) */
+ #if defined(_SDCC_BIGMEM_)     
+-  uint32_t    asm_addr;      // 16b/24b address
+-  uint8_t     asm_val;       // 1B data for r/w data
++  extern uint32_t    asm_addr;      // 16b/24b address
++  extern uint8_t     asm_val;       // 1B data for r/w data
+ #endif // _SDCC_BIGMEM_
+ 
+ /* Private Constants ---------------------------------------------------------*/
+@@ -138,13 +138,20 @@
+ #endif // _SDCC_BIGMEM_
+ 
+ /* Private functions ---------------------------------------------------------*/
+- 
++
+ /* SDCC patch: r/w helper routines for >64kB addresses using inline ASM (SDCC doesn't support far pointers yet) */
+ /** @addtogroup FLASH_Helper_functions
+   * @{
+   */
+ 
+-#if defined (_SDCC_BIGMEM_)
++/**
++ * SDCC patch: for >64kB to pass data to/from inline ASM (SDCC doesn't support far pointers yet)
++ */
++#if defined(_SDCC_BIGMEM_)     
++  uint32_t    asm_addr;      // 16b/24b address
++  uint8_t     asm_val;       // 1B data for r/w data
++#endif // _SDCC_BIGMEM_
++ 
+ /**
+   * @brief  write single byte to address
+   * @note   is required for >64kB memory space and SDCC, which doesn't yet support far pointers
+@@ -152,6 +159,7 @@
+   *         Data :    value to write
+   * @retval None
+   */
++#if defined (_SDCC_BIGMEM_)
+ void write_byte_address(uint32_t Address, uint8_t Data)
+ {
+   /* store address & data globally for assember */
+@@ -166,6 +174,7 @@
+ 
+ }
+ 
++#endif // _SDCC_BIGMEM_
+ 
+ /**
+   * @brief  Reads any byte from flash memory
+@@ -173,6 +182,7 @@
+   * @param  Address : address to read
+   * @retval value read
+   */
++#if defined (_SDCC_BIGMEM_)
+ uint8_t read_byte_address(uint32_t Address)
+ {
+   /* store address globally for assember */
+diff -ru a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_rst.c b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_rst.c
+--- a/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_rst.c	2019-01-04 00:14:05.838408504 +0100
++++ b/STM8TL5x_StdPeriph_Driver/src/stm8tl5x_rst.c	2019-01-04 00:18:35.816182692 +0100
+@@ -31,7 +31,7 @@
+ 
+ /* Private typedef -----------------------------------------------------------*/
+ 
+-/**
++/***
+   * @addtogroup RST_Private_Define
+   * @{
+   */
