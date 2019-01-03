@@ -1,0 +1,25 @@
+From 95bf3f254f0213d4394851c4964e804283504819 Mon Sep 17 00:00:00 2001
+From: Michael Mayer <michael-mayer@gmx.de>
+Date: Thu, 3 Jan 2019 16:56:50 +0100
+Subject: [PATCH 3/5] deactivate FULL_ASSERT
+
+---
+ STM8S_StdPeriph_Driver/inc/stm8s_conf.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/STM8S_StdPeriph_Driver/inc/stm8s_conf.h b/STM8S_StdPeriph_Driver/inc/stm8s_conf.h
+index d5a9c6a..23552ab 100644
+--- a/STM8S_StdPeriph_Driver/inc/stm8s_conf.h
++++ b/STM8S_StdPeriph_Driver/inc/stm8s_conf.h
+@@ -92,7 +92,7 @@
+ /* Exported constants --------------------------------------------------------*/
+ /* Uncomment the line below to expanse the "assert_param" macro in the
+    Standard Peripheral Library drivers code */
+-#define USE_FULL_ASSERT    (1) 
++//#define USE_FULL_ASSERT    (1) 
+ 
+ /* Exported macro ------------------------------------------------------------*/
+ #ifdef  USE_FULL_ASSERT
+-- 
+2.17.1
+

@@ -1,0 +1,88 @@
+From 601174621ac2232b4c7ab4b87a984b79cb8f1c47 Mon Sep 17 00:00:00 2001
+From: Michael Mayer <michael-mayer@gmx.de>
+Date: Thu, 3 Jan 2019 21:30:56 +0100
+Subject: [PATCH] zusammengefasst
+
+---
+ STM8S_StdPeriph_Driver/src/stm8s_clk.c   | 5 +++--
+ STM8S_StdPeriph_Driver/src/stm8s_flash.c | 9 +++++----
+ STM8S_StdPeriph_Driver/src/stm8s_rst.c   | 2 +-
+ 3 files changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/STM8S_StdPeriph_Driver/src/stm8s_clk.c b/STM8S_StdPeriph_Driver/src/stm8s_clk.c
+index 0566409..4e56a3c 100644
+--- a/STM8S_StdPeriph_Driver/src/stm8s_clk.c
++++ b/STM8S_StdPeriph_Driver/src/stm8s_clk.c
+@@ -45,8 +45,8 @@
+   * @{
+   */
+ 
+-CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Divider factors */
+-CONST uint8_t CLKPrescTable[8] = {1, 2, 4, 8, 10, 16, 20, 40}; /*!< Holds the different CLK prescaler values */
++//CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Divider factors */
++//CONST uint8_t CLKPrescTable[8] = {1, 2, 4, 8, 10, 16, 20, 40}; /*!< Holds the different CLK prescaler values */
+ 
+ /**
+   * @}
+@@ -566,6 +566,7 @@ CLK_Source_TypeDef CLK_GetSYSCLKSource(void)
+   * @param  None
+   * @retval the master clock frequency
+   */
++CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Divider factors */
+ uint32_t CLK_GetClockFreq(void)
+ {
+   uint32_t clockfrequency = 0;
+diff --git a/STM8S_StdPeriph_Driver/src/stm8s_flash.c b/STM8S_StdPeriph_Driver/src/stm8s_flash.c
+index ec62a79..5211198 100644
+--- a/STM8S_StdPeriph_Driver/src/stm8s_flash.c
++++ b/STM8S_StdPeriph_Driver/src/stm8s_flash.c
+@@ -31,7 +31,7 @@
+ /** @addtogroup STM8S_StdPeriph_Driver
+   * @{
+   */
+-/**
++/***
+ @code
+  This driver provides functions to configure and program the Flash memory of all
+  STM8S devices.
+@@ -99,12 +99,13 @@
+ /* Private Constants ---------------------------------------------------------*/
+  
+ /* SDCC patch: r/w helper routines for >64kB addresses using inline ASM (SDCC doesn't support far pointers yet) */
+-/** @addtogroup FLASH_Helper_functions
++/**
++  * @addtogroup FLASH_Helper_functions
+   * @{
+   */
+ 
+ #if defined (_SDCC_BIGMEM_)
+-/**
++/***
+   * @brief  write single byte to address
+   * @note   is required for >64kB memory space and SDCC, which doesn't yet support far pointers
+   * @param  Address : address to write to
+@@ -126,7 +127,7 @@ __endasm;
+ }
+ 
+ 
+-/**
++/***
+   * @brief  Reads any byte from flash memory
+   * @note   is required for >64kB memory space and SDCC, which doesn't yet support far pointers
+   * @param  Address : address to read
+diff --git a/STM8S_StdPeriph_Driver/src/stm8s_rst.c b/STM8S_StdPeriph_Driver/src/stm8s_rst.c
+index 523f650..ded73bb 100644
+--- a/STM8S_StdPeriph_Driver/src/stm8s_rst.c
++++ b/STM8S_StdPeriph_Driver/src/stm8s_rst.c
+@@ -39,7 +39,7 @@
+ /* Private function prototypes -----------------------------------------------*/
+ /* Private Constants ---------------------------------------------------------*/
+ /* Public functions ----------------------------------------------------------*/
+-/**
++/***
+   * @addtogroup RST_Public_Functions
+   * @{
+   */
+-- 
+2.17.1
+
