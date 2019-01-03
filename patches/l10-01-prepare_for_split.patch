@@ -1,0 +1,66 @@
+diff -ru a/STM8L10x_StdPeriph_Driver/src/stm8l10x_clk.c b/STM8L10x_StdPeriph_Driver/src/stm8l10x_clk.c
+--- a/STM8L10x_StdPeriph_Driver/src/stm8l10x_clk.c	2019-01-03 22:56:44.175643513 +0100
++++ b/STM8L10x_StdPeriph_Driver/src/stm8l10x_clk.c	2019-01-03 23:10:32.301187294 +0100
+@@ -45,13 +45,6 @@
+ /* Private Constants ---------------------------------------------------------*/
+ 
+ /**
+-  * @addtogroup CLK_Private_Constants
+-  * @{
+-  */
+-
+-CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Dividor factors */
+-
+-/**
+   * @}
+   */
+ 
+@@ -174,6 +167,13 @@
+ }
+ 
+ /**
++  * @addtogroup CLK_Private_Constants
++  * @{
++  */
++
++CONST uint8_t HSIDivFactor[4] = {1, 2, 4, 8}; /*!< Holds the different HSI Dividor factors */
++
++/***
+   * @brief  This function returns the frequencies of different on chip clocks.
+   * @param  None
+   * @retval The master clock frequency
+diff -ru a/STM8L10x_StdPeriph_Driver/src/stm8l10x_flash.c b/STM8L10x_StdPeriph_Driver/src/stm8l10x_flash.c
+--- a/STM8L10x_StdPeriph_Driver/src/stm8l10x_flash.c	2019-01-03 22:56:44.179643598 +0100
++++ b/STM8L10x_StdPeriph_Driver/src/stm8l10x_flash.c	2019-01-03 23:14:07.229725053 +0100
+@@ -150,7 +150,6 @@
+   * @{
+   */
+ 
+-#if defined (_SDCC_BIGMEM_)
+ /**
+   * @brief  write single byte to address
+   * @note   is required for >64kB memory space and SDCC, which doesn't yet support far pointers
+@@ -158,6 +157,7 @@
+   *         Data :    value to write
+   * @retval None
+   */
++#if defined (_SDCC_BIGMEM_)
+ void write_byte_address(uint32_t Address, uint8_t Data)
+ {
+   /* store address & data globally for assember */
+@@ -172,6 +172,7 @@
+ 
+ }
+ 
++#endif // _SDCC_BIGMEM_
+ 
+ /**
+   * @brief  Reads any byte from flash memory
+@@ -179,6 +180,7 @@
+   * @param  Address : address to read
+   * @retval value read
+   */
++#if defined (_SDCC_BIGMEM_)
+ uint8_t read_byte_address(uint32_t Address)
+ {
+   /* store address globally for assember */
