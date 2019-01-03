@@ -1,9 +1,3 @@
-From 601174621ac2232b4c7ab4b87a984b79cb8f1c47 Mon Sep 17 00:00:00 2001
-From: Michael Mayer <michael-mayer@gmx.de>
-Date: Thu, 3 Jan 2019 21:30:56 +0100
-Subject: [PATCH] zusammengefasst
-
----
  STM8S_StdPeriph_Driver/src/stm8s_clk.c   | 5 +++--
  STM8S_StdPeriph_Driver/src/stm8s_flash.c | 9 +++++----
  STM8S_StdPeriph_Driver/src/stm8s_rst.c   | 2 +-
@@ -83,6 +77,3 @@ index 523f650..ded73bb 100644
    * @addtogroup RST_Public_Functions
    * @{
    */
--- 
-2.17.1
-
