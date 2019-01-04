@@ -29,6 +29,6 @@ if test $(uname) = Linux; then
 fi
 
 # apply all patches in order
-for i in patches/tl5-*.patch; do
+for i in patches/stm8tl5x-*.patch; do
 	patch -p1 < $i
 done

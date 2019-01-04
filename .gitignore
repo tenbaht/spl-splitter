@@ -1,0 +1,10 @@
+# ignore backup files
+*.bak
+*~
+# ignore build directories
+build-*/
+# ignore binary directories (input zip files and the compiled libraries)
+lib/
+zips
+# ignore unpacked library source files
+STM8*/

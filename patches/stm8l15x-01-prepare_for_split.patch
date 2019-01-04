@@ -61,3 +61,23 @@ diff -ru a/STM8L15x_StdPeriph_Driver/src/stm8l15x_flash.c b/STM8L15x_StdPeriph_D
  uint8_t read_byte_address(uint32_t Address)
  {
    /* store address globally for assember */
+diff -rux '*~' a/STM8L15x_StdPeriph_Driver/src/stm8l15x_clk.c b/STM8L15x_StdPeriph_Driver/src/stm8l15x_clk.c
+--- a/STM8L15x_StdPeriph_Driver/src/stm8l15x_clk.c	2019-01-04 11:16:44.167180904 +0100
++++ b/STM8L15x_StdPeriph_Driver/src/stm8l15x_clk.c	2019-01-04 11:30:53.000119643 +0100
+@@ -71,7 +71,7 @@
+ /* Private macro -------------------------------------------------------------*/
+ /* Private Variables ---------------------------------------------------------*/
+ /* Private Constant ---------------------------------------------------------*/
+-CONST uint8_t SYSDivFactor[5] = {1, 2, 4, 8, 16}; /*!< Holds the different Master clock Divider factors */
++//CONST uint8_t SYSDivFactor[5] = {1, 2, 4, 8, 16}; /*!< Holds the different Master clock Divider factors */
+ /* Private function prototypes -----------------------------------------------*/
+ /* Private functions ---------------------------------------------------------*/
+ 
+@@ -475,6 +475,7 @@
+   *
+   * @retval System Clock frequency value
+   */
++CONST uint8_t SYSDivFactor[5] = {1, 2, 4, 8, 16}; /*!< Holds the different Master clock Divider factors */
+ uint32_t CLK_GetClockFreq(void)
+ {
+   uint32_t clockfrequency = 0;

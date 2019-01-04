@@ -1,6 +1,7 @@
 #!/bin/bash
 
 STEM=stm8l15x
+LIBDIR=STM8L15x_StdPeriph_Driver
 
 ## parameter check
 
@@ -11,11 +12,23 @@ compile them seperately and pack them all together into one big library.
 
 usage: $0 cputype
 
-supported cpu types as found in inc/stm8l15.h:
+supported cpu types as found in inc/${STEM}.h:
 EOF
-	grep defined inc/$STEM.h|fmt -1|sed -n 's,.*(STM8,\tSTM8,p'|sed 's,).*,,'|sort|uniq
+	grep defined $LIBDIR/inc/$STEM.h|fmt -1|sed -n 's,.*(STM8,\tSTM8,p'|sed 's,).*,,'|sort -u
+	cat << EOF
+
+These cpu groups are known to use identical libraries:
+	Low density devices:              STM8L05X_LD, STM8L15X_LD_VL
+	Medium density devices:           STM8AL31_L_MD, STM8L05X_MD_VL,
+	                                  STM8L15X_MD, STM8L15X_MDP
+	High density devices:             STM8L15X_HD, STM8L05X_HD_VL
+
+See STM8L15x_StdPeriph_Driver/inc/stm8l15x.h for a more detailed definition
+of CPUs and CPU groups.
+EOF
 	exit 1
 fi
+
 
 CPU=$1
 
@@ -26,7 +39,7 @@ CPU=$1
 # define the compile parameter
 CC="sdcc"
 AR="sdar"
-CFLAGS="-mstm8 -D${CPU} -I ../inc -I ../src --opt-code-size -I."
+CFLAGS="-mstm8 -D${CPU} -I ../$LIBDIR/inc --opt-code-size -I."
 LDFLAGS="-rc"
 
 BUILDDIR="build-${CPU}"
@@ -41,12 +54,17 @@ BUILDDIR="build-${CPU}"
 LIBRARY=${CPU}.lib
 
 # check the dependencies, generate the list of needed c source files
-HFILES=$($CC -mstm8 -Iinc -Isrc -D$CPU "-Wp-MM" -E inc/$STEM.h|\
-	fmt -1|\
-	sed -n "s, *inc/${STEM}_,${STEM}_,p")
-CFILES=${HFILES//.h/.c}
-# remove (the non-existing) stm8l15x_conf.c from the list of c files:
-CFILES=${CFILES//${STEM}_conf.c/}
+HFILES=$(cd $LIBDIR/inc; $CC -mstm8 -I. -D$CPU "-Wp-MM" -E $STEM.h)
+
+# Clean up the dependency list.
+#
+# The list starts with the .rel file name and the general files ${STEM}_conf.h
+# and ${STEM}.h. Remove these as there is no corresponding C file and remove
+# all backslashes that are supposed to connect the lines.
+HFILES=${HFILES//\\/}	# remove backslashes
+HFILES=${HFILES##*${STEM}.h}
+
+CFILES=${HFILES//.h/.c}	# replace .h suffix by .c suffix
 
 # debug output
 echo "Needed source code modules for CPU $CPU:"
@@ -101,7 +119,7 @@ echo "using $BUILDDIR"
 
 # split all needed source files into single-function source files
 for i in $CFILES; do
-	splitit ../src/$i
+	splitit ../$LIBDIR/src/$i
 done
 
 # compile all split files
@@ -115,6 +133,3 @@ done
 # build the library
 mkdir -p ../lib
 ${AR} ${LDFLAGS} ../lib/${LIBRARY} *.rel
-
-# get the generated library
-#mv *.lib ..

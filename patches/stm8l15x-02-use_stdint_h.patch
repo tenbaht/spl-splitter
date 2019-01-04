@@ -1,0 +1,21 @@
+diff -rux '*~' a/STM8L15x_StdPeriph_Driver/inc/stm8l15x.h b/STM8L15x_StdPeriph_Driver/inc/stm8l15x.h
+--- a/STM8L15x_StdPeriph_Driver/inc/stm8l15x.h	2019-01-04 12:46:56.238513766 +0100
++++ b/STM8L15x_StdPeriph_Driver/inc/stm8l15x.h	2019-01-04 12:46:30.525966698 +0100
+@@ -233,6 +233,9 @@
+ #define     __O     volatile         /*!< defines 'write only' permissions    */
+ #define     __IO    volatile         /*!< defines 'read / write' permissions  */
+ 
++#ifdef USE_STDINT
++#include <stdint.h>
++#else
+ /*!< Signed integer types  */
+ typedef   signed char     int8_t;
+ typedef   signed short    int16_t;
+@@ -242,6 +245,7 @@
+ typedef unsigned char     uint8_t;
+ typedef unsigned short    uint16_t;
+ typedef unsigned long     uint32_t;
++#endif
+ 
+ /*!< STM8Lx Standard Peripheral Library old types (maintained for legacy purpose) */
+ 

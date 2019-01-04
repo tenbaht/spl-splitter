@@ -1,0 +1,12 @@
+diff -rux '*~' a/STM8L10x_StdPeriph_Driver/inc/stm8l10x_conf.h b/STM8L10x_StdPeriph_Driver/inc/stm8l10x_conf.h
+--- a/STM8L10x_StdPeriph_Driver/inc/stm8l10x_conf.h	2019-01-04 10:41:49.402506172 +0100
++++ b/STM8L10x_StdPeriph_Driver/inc/stm8l10x_conf.h	2019-01-04 10:45:01.189284219 +0100
+@@ -57,7 +57,7 @@
+ 
+ /* Uncomment the line below to expanse the "assert_param" macro in the 
+    Standard Peripheral Library drivers code */
+-#define USE_FULL_ASSERT    1
++//#define USE_FULL_ASSERT    1
+ 
+ /* Exported macro ------------------------------------------------------------*/
+ #ifdef  USE_FULL_ASSERT
