@@ -15,12 +15,23 @@ These scripts assist the SDCC linker by splitting the source into smaller
 units, usually only one function per file. All split files are compiled
 individually and packed together into a CPU-specific library.
 
-This way very function can be linked independently and dead code is
+This way every function can be linked independently and dead code is
 automatically eleminated at linking time, saving precious flash memory
 space.
 
 
 ## Usage
+
+Clone or download and unpack this repository and
+the [SDCC SPL patches](https://github.com/gicking/STM8-SPL_SDCC_patch)
+into sibling directories. Enter the spl-splitter directory:
+
+
+	git clone https://github.com/tenbaht/spl-splitter.git
+	git clone https://github.com/gicking/STM8-SPL_SDCC_patch.git
+	cd spl-splitter
+
+
 
 Download the SPL archive file from the ST website (free registration
 required) into a subdirectory `zips/`:
@@ -29,8 +40,7 @@ required) into a subdirectory `zips/`:
   - STM8L15x-16x-05x-AL31-L: [STSW-STM8016](https://www.st.com/en/embedded-software/stsw-stm8016.html)
   - STM8TL5x: [STSW-STM8030](https://www.st.com/en/embedded-software/stsw-stm8030.html)
 
-Clone or download the [SDCC SPL patches](https://github.com/gicking/STM8-SPL_SDCC_patch)
-into a sibling directory `../STM8-SPL_SDCC_patch/`
+
 
 Unpack, patch and compile the SPL archive:
   - STM8S/A: `make s`
@@ -43,6 +53,20 @@ The compiled libraries are generated in the `lib/` folder.
 
 The `build-*` directories are not needed anymore and can safely be deleted.
 They are only left for reference.
+
+
+
+## Using windows
+
+The patch and build scripts are simple bash scripts. Enviroments like msys2,
+mingw or cygwin will definitely do. Busybox would be great and the easiest
+solution, but I am not sure if all scripts will work. At least it should be
+close. Pull requests welcome!
+
+The line endings might be a problem when applying the patches. If so, check
+your `core.autocrlf` setting in git (see [Dealing with line
+endings](https://help.github.com/articles/dealing-with-line-endings/#platform-windows).
+If you are using msysgit, configure it for "Checkout Windows-style")
 
 
 ## The stategy
