@@ -22,15 +22,12 @@ space.
 
 ## Usage
 
-Clone or download and unpack this repository and
-the [SDCC SPL patches](https://github.com/gicking/STM8-SPL_SDCC_patch)
-into sibling directories. Enter the spl-splitter directory:
+Clone this repository and the [SDCC SPL
+patches](https://github.com/gicking/STM8-SPL_SDCC_patch).
+Enter the spl-splitter directory:
 
-
-	git clone https://github.com/tenbaht/spl-splitter.git
-	git clone https://github.com/gicking/STM8-SPL_SDCC_patch.git
+	git clone --recursive https://github.com/tenbaht/spl-splitter.git
 	cd spl-splitter
-
 
 
 Download the SPL archive file from the ST website (free registration
@@ -65,8 +62,10 @@ close. Pull requests welcome!
 
 The line endings might be a problem when applying the patches. If so, check
 your `core.autocrlf` setting in git (see [Dealing with line
-endings](https://help.github.com/articles/dealing-with-line-endings/#platform-windows).
-If you are using msysgit, configure it for "Checkout Windows-style")
+endings](https://help.github.com/articles/dealing-with-line-endings/#platform-windows)
+and consider using `patch --binary`. If you are using msysgit or [git for
+windows](https://gitforwindows.org/), configure it for "Checkout
+Windows-style")
 
 
 ## The stategy

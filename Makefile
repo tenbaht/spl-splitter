@@ -47,6 +47,4 @@ tl5:
 
 # print a diff for directories a/ and b/ (to generate a patch file)
 diff:
-	@# add an extra "echo" to ensure a zero return value
-	@diff -rux "*~" a b || echo > /dev/null
-
+	-diff -rux "*~" a b || echo > /dev/null

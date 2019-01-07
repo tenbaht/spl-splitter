@@ -16,7 +16,7 @@ unzip zips/en.stsw-stm8030.zip
 chmod +w -R ${TOPDIR}
 
 # apply Georg's patch:
-patch -p0 < ../STM8-SPL_SDCC_patch/STM8TL5x_StdPeriph_Lib_V1.0.1.patch
+patch -p0 < STM8-SPL_SDCC_patch/STM8TL5x_StdPeriph_Lib_V1.0.1.patch
 
 # grab the needed files
 mv ${TOPDIR}/Libraries/$LIBDIR .

@@ -6,5 +6,6 @@ build-*/
 # ignore binary directories (input zip files and the compiled libraries)
 lib/
 zips
-# ignore unpacked library source files
-STM8*/
+# ignore library source files
+STM8*_StdPeriph_Lib/
+STM8*_StdPeriph_Driver/
